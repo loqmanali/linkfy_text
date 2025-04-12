@@ -29,6 +29,17 @@ void main() {
       "https://domain.com/Google?param=",
       "https://domain.com/Google?param=helloworld",
       "https://sub.domain.com/Google?param=helloworld#hash",
+      // Test cases for localhost
+      "http://localhost",
+      "http://localhost:3000",
+      "https://localhost/path",
+      "http://localhost:8080/api",
+      // Test cases for IP addresses
+      "http://192.168.1.1",
+      "https://10.0.0.1:8080",
+      "http://127.0.0.1",
+      "http://192.168.1.254/cgi-bin/apphosting.ha",
+      "https://192.168.0.1:8080/admin"
     ];
 
     const hashtags = [

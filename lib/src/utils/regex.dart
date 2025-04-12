@@ -2,13 +2,15 @@ import 'package:linkfy_text/src/enum.dart';
 
 // String urlRegExp =
 
-// url regex that accept https, http, www
+// url regex that accept https, http, www, localhost and IP addresses
 String urlRegExp =
-    r'((https?://)?(www\.)?[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))';
+    r'((https?://)?(www\.)?([a-zA-Z0-9@:%._\+~#=-]{2,256}\.[a-z]{2,6}|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))';
 
-String hashtagRegExp = r'#[a-zA-Z\u00C0-\u01B4\w_\u1EA0-\u1EF9!$%^&]{1,}(?=\s|$)';
+String hashtagRegExp =
+    r'#[a-zA-Z\u00C0-\u01B4\w_\u1EA0-\u1EF9!$%^&]{1,}(?=\s|$)';
 
-String userTagRegExp = r'@[a-zA-Z\u00C0-\u01B4\w_\u1EA0-\u1EF9!$%^&]{1,}(?=\s|$)';
+String userTagRegExp =
+    r'@[a-zA-Z\u00C0-\u01B4\w_\u1EA0-\u1EF9!$%^&]{1,}(?=\s|$)';
 String phoneRegExp =
     r'\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*';
 String emailRegExp =
@@ -49,7 +51,6 @@ RegExp constructRegExpFromLinkType(List<LinkType> types) {
             ? buffer.write("($phoneRegExp)")
             : buffer.write("($phoneRegExp)|");
         break;
-      default:
     }
   }
   return RegExp(buffer.toString());
@@ -61,11 +62,11 @@ LinkType getMatchedType(String match) {
     type = LinkType.email;
   } else if (RegExp(urlRegExp).hasMatch(match)) {
     type = LinkType.url;
-  }else if (RegExp(phoneRegExp).hasMatch(match)) {
+  } else if (RegExp(phoneRegExp).hasMatch(match)) {
     type = LinkType.phone;
   } else if (RegExp(userTagRegExp).hasMatch(match)) {
     type = LinkType.userTag;
-  }  else if (RegExp(hashtagRegExp).hasMatch(match)) {
+  } else if (RegExp(hashtagRegExp).hasMatch(match)) {
     type = LinkType.hashTag;
   }
   return type;
