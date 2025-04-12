@@ -29,6 +29,10 @@ void main() {
       "https://domain.com/Google?param=",
       "https://domain.com/Google?param=helloworld",
       "https://sub.domain.com/Google?param=helloworld#hash",
+      "https://my-domain.com",
+      "http://my-awesome-website.com",
+      "www.my-site-with-hyphens.com",
+      "https://sub-domain.example.com"
     ];
 
     const hashtags = [
@@ -67,7 +71,8 @@ void main() {
 
     test("Should match all urls", () {
       for (final url in urls) {
-        expect(RegExp(urlRegExp).hasMatch(url), isTrue);
+        expect(RegExp(urlRegExp).hasMatch(url), isTrue,
+            reason: "Failed to match URL: $url");
         expect(getMatchedType(url), equals(LinkType.url));
       }
     });

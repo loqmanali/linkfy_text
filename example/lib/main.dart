@@ -3,24 +3,28 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:linkfy_text/linkfy_text.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 final k = GlobalKey<ScaffoldMessengerState>();
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'linkfy_text Demo',
       scaffoldMessengerKey: k,
       debugShowCheckedModeBanner: false,
-      home: App(),
+      home: const App(),
     );
   }
 }
 
 class App extends StatefulWidget {
+  const App({super.key});
+
   @override
   _AppState createState() => _AppState();
 }
@@ -31,7 +35,8 @@ class _AppState extends State<App> {
 
   final List<Map<String, dynamic>> texts = [
     {
-      "text": "O1. This text contains a url: https://flutter.dev",
+      "text":
+          "O1. Testing hyphenated domains: https://my-website.com and http://sub-domain.example-site.com",
       "types": null
     },
     {
@@ -52,7 +57,7 @@ class _AppState extends State<App> {
     },
     {
       "text":
-          "O6. My website url: https://hello.com/GOOGLE search using: www.google.com, social media is facebook.com, additional link https://example.com/method?param=fullstackoverflow.dev, hashtag #trending & mention @dev.user +18009999999",
+          "O6. Testing complex URLs: https://my-complex-domain.com/path?param=value and https://sub-domain.my-site.com/test",
       "types": [
         LinkType.phone,
         LinkType.email,
@@ -66,7 +71,7 @@ class _AppState extends State<App> {
   void showSnackbar(String msg) {
     k.currentState!.removeCurrentSnackBar();
     k.currentState!.showSnackBar(SnackBar(
-      content: Text("$msg", style: textStyle),
+      content: Text(msg, style: textStyle),
       behavior: SnackBarBehavior.floating,
     ));
   }
@@ -90,13 +95,13 @@ class _AppState extends State<App> {
             ),
             for (var i = 0; i < texts.length; i++)
               Padding(
-                  padding: EdgeInsets.only(top: 14),
+                  padding: const EdgeInsets.only(top: 14),
                   child: LinkifyText(
                     texts[i]['text'],
                     textAlign: TextAlign.left,
                     linkTypes: texts[i]['types'],
                     textStyle: textStyle,
-                    customLinkStyles: {
+                    customLinkStyles: const {
                       LinkType.email: TextStyle(color: Colors.blue),
                       LinkType.hashTag: TextStyle(color: Colors.green),
                       LinkType.userTag: TextStyle(color: Colors.deepPurple),
